@@ -23,7 +23,7 @@ namespace BlazorShared.Pages
         [Inject] protected WebClientInfoProvider WebClientInfo { get; set; }
         [Inject] protected ClipboardService ClipboardService { get; set; }
         [Inject] protected IIPAddressManager IPAddressManager { get; set; }
-        //[Inject] protected IFreeSql fsql { get; set; }
+        [Inject] protected IFreeSql fsql { get; set; }
 
         private List<PcStatus> pcStatuss;
         private List<PC> pcs;
@@ -40,7 +40,7 @@ namespace BlazorShared.Pages
             if (firstRender)
             {
                 worker();
-                //records = fsql.Select<Item>().ToList();
+                records = fsql.Select<Item>().ToList();
             }
         }
 

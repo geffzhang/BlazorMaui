@@ -63,6 +63,11 @@
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
+	  <CodesignKey>Apple Development: zhou chuanglin %28W9D8HB5VZK%29</CodesignKey>
+	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Content Remove="C:\Users\Administrator\.nuget\packages\bootstrapblazor\6.1.0\contentFiles\any\net6.0\wwwroot\css\bootstrap.blazor.bundle.min.css" />
 		<Content Remove="C:\Users\Administrator\.nuget\packages\bootstrapblazor\6.1.0\contentFiles\any\net6.0\wwwroot\css\motronic.min.css" />

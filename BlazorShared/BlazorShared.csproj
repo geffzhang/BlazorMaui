@@ -15,6 +15,7 @@
     <ItemGroup>
       <PackageReference Include="Densen.Extensions.BootstrapBlazor" Version="6.1.19-preview" />
       <PackageReference Include="FreeSql" Version="3.0.100" />
+      <PackageReference Include="FreeSql.Provider.Sqlite" Version="3.0.100" />
     </ItemGroup>
 
     <ItemGroup>
