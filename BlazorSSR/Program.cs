@@ -4,6 +4,7 @@
 // e-mail:zhouchuanglin@gmail.com 
 // **********************************
 
+using BlazorShared.Pages;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 
@@ -24,6 +25,19 @@ builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSharedExtensions();
+builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddFreeSql(option =>
+{
+    option.UseConnectionString(FreeSql.DataType.Sqlite, "Data Source=test.db;")
+#if DEBUG
+         //开发环境:自动同步实体
+         .UseAutoSyncStructure(true)
+         .UseNoneCommandParameter(true)
+         //调试sql语句输出
+         .UseMonitorCommand(cmd => System.Console.WriteLine(cmd.CommandText))
+#endif
+                    ;
+});
 
 var app = builder.Build();
 

@@ -10,7 +10,8 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebView.Wpf" Version="6.0.200-preview.13.2865" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-	</ItemGroup>
+        <PackageReference Include="Densen.FreeSql.Extensions.BootstrapBlazor" Version="6.0.2" />
+    </ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\BlazorShared\BlazorShared.csproj" />
 	</ItemGroup>

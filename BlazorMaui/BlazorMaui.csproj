@@ -50,6 +50,7 @@
         <PackageReference Include="SQLitePCLRaw.core" Version="2.0.7" />
         <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.7" />
         <PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.0.7" />
+        <PackageReference Include="Densen.FreeSql.Extensions.BootstrapBlazor" Version="6.0.2" />
     </ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
