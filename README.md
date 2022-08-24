@@ -88,7 +88,7 @@ Using .NET MAUI, you can develop apps that can run on Android, iOS, macOS, and W
 
 ------------------------------------
 
-2-24
+2022-2-24
 
 Maui blazor 最新preview版本发布ok了,只是还不能打非依赖包和裁剪. 
 发布后 安装net6 desktop rumtime + webview2 x64就能运行.
@@ -102,4 +102,17 @@ webview2
 https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/4182949e-08fa-48c6-9845-edf4ff44767b/MicrosoftEdgeWebView2RuntimeInstallerX64.exe
 
 ![image](https://user-images.githubusercontent.com/8428709/155608453-b9eca2a9-7862-4ff2-b78f-c57ce1c3dad4.png)
+
+2022-8-3
+
+跟着官方改动更新了一下maui+bb的工程, 加了直接定位获取的功能和显示app设置页, 拍照等按钮功能
+
+![Screenshot_1659559973](https://user-images.githubusercontent.com/8428709/182711516-5b82a9ef-f31d-403e-9f2a-143e85405fcb.png)
+
+定位搞定
+需要 提供了一个PermissionManagingBlazorWebChromeClient将 Webkit 资源映射到 Android 权限并执行推荐的请求权限的工作流。
+https://github.com/MackinnonBuck/MauiBlazorPermissionsExample
+
+![image](https://user-images.githubusercontent.com/8428709/182727798-66421002-73b5-4fd2-9290-ef3027f8b8fb.png)
+
 

@@ -4,13 +4,9 @@
              xmlns:local="clr-namespace:BlazorMaui"
              xmlns:shared="clr-namespace:BlazorShared;assembly=BlazorShared"
              Title="BlazorUwp"
-             x:Class="BlazorMaui.MainPage"
+             x:Class="BlazorMaui.AppModelPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <BlazorWebView x:Name="_blazorWebView" HostPage="wwwroot/index.html">
-        <BlazorWebView.RootComponents>
-            <RootComponent Selector="#app" ComponentType="{x:Type shared:App}" />
-        </BlazorWebView.RootComponents>
-    </BlazorWebView> 
-
+    
+ 
 </ContentPage>

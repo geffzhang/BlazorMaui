@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using BlazorShared.Services;
+using LibraryShared;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 using System.Globalization;
 
@@ -15,15 +17,25 @@ namespace BlazorMaui
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                });
+                })
+                .ConfigureEssentials(essentials =>
+                {
+                    essentials
+                        .AddAppAction("app_info", "App Info", icon: "app_info_action_icon")
+                        .AddAppAction("battery_info", "Battery Info")
+                        .OnAppAction(App.HandleAppActions);
+                }); ;
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSharedExtensions();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-            builder.Services.AddSharedExtensions();
+            builder.Services.AddSingleton<ITools, TestService>();
 
             return builder.Build();
         }
+
+
     }
 }
