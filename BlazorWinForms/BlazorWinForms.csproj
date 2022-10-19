@@ -10,7 +10,7 @@
     </PropertyGroup>
 
 	<ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="6.0.486" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="6.0.541" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
 	</ItemGroup>
     <ItemGroup>
@@ -22,6 +22,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Update="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	  <Content Update="wwwroot\index.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
