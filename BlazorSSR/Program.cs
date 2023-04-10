@@ -4,9 +4,13 @@
 // e-mail:zhouchuanglin@gmail.com 
 // **********************************
 
+using BlazorShared;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.StaticFiles;
 using System.IO.Compression;
+using System.Web.Services.Description;
 
+AppState _appState = new();
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddResponseCompression(options =>
 {
@@ -18,15 +22,15 @@ builder.Services.AddResponseCompression(options =>
 });
 builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
 {
-    options.Level = (CompressionLevel)4;
+    options.Level = CompressionLevel.Optimal;
 });
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSharedExtensions();
-builder.Services.AddFileSystemExtensions();
-builder.Services.AddOcrExtensions(builder.Configuration["AzureCvKey"], builder.Configuration["AzureCvUrl"]);
-builder.Services.AddAIFormExtensions(builder.Configuration["AzureAiFormKey"], builder.Configuration["AzureAiFormUrl"]);
+builder.Services.AddOcrExtensions();
+builder.Services.AddAIFormExtensions();
+builder.Services.AddSingleton(_appState);
 
 var app = builder.Build();
 
@@ -42,7 +46,12 @@ else
 app.UseResponseCompression();
 
 app.UseHttpsRedirection();
+var provider = new FileExtensionContentTypeProvider { Mappings = { [".properties"] = "application/octet-stream" , [".mp4"] = "application/octet-stream" } };
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
 app.UseStaticFiles();
 //app.UseDefaultFiles();
 app.UseDirectoryBrowser(new DirectoryBrowserOptions()

@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 BlazorSSR/sqliteSample.db
+/BlazorMaui/myapp.keystore
+BlazorLinux/sqliteSample.db

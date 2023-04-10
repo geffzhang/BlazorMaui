@@ -1,49 +1,78 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+        <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 
-        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
-        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
-        <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</SupportedOSPlatformVersion>
-        <TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <SingleProject>true</SingleProject>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+        <Configurations>Debug;Release;DebugNuget</Configurations>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <Version>1.1.5</Version>
+        <PackageProjectUrl>https://github.com/densen2014/BlazorMaui</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/densen2014/BlazorMaui</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>BlazorMaui, 整合Blazor,BootstrapBlazor UI组件库,Maui的共享跨平台工程示例共享库</PackageTags>
+        <Description>BlazorMaui , 整合Blazor,BootstrapBlazor UI组件库,Maui的共享跨平台工程示例共享库</Description>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <Copyright>DensenInformatica</Copyright>
+        <Authors>Alex Chow</Authors>
+        <Company>Densen Informatica</Company>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <PackageIcon>logo.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AME.Extensions" Version="6.10.2" />
-        <PackageReference Include="BootstrapBlazor" Version="6.11.29" />
-        <PackageReference Include="BootstrapBlazor.BarCode" Version="6.3.0" />
-        <PackageReference Include="BootstrapBlazor.Chart" Version="6.0.0" />
-        <PackageReference Include="Densen.Component.Blazor" Version="6.10.0" />
-        <PackageReference Include="FreeSql" Version="3.2.682" />
-        <PackageReference Include="BootstrapBlazor.FontAwesome" Version="6.3.0" />
-        <PackageReference Include="BootstrapBlazor.BaiduMap" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.Geolocation" Version="6.2.2" />
-        <PackageReference Include="BootstrapBlazor.Viewer" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.WebAPI" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.Maps" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.Bluetooth" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.OCR" Version="6.2.4" />
-        <PackageReference Include="BootstrapBlazor.OnScreenKeyboard" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.SignaturePad" Version="6.2.1" />
-        <PackageReference Include="BootstrapBlazor.FileSystem" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.1" />
+        <None Include="..\logo.png" Pack="true" PackagePath="" />
+        <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'!='Preview'">
-        <PackageReference Include="Densen.Extensions.BootstrapBlazor" Version="6.10.2" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'=='Preview'">
-        <ProjectReference Include="..\..\Densen.Extensions\Blazor\Densen.Extensions.BootstrapBlazor.csproj" />
-    </ItemGroup>
-
+    
     <ItemGroup>
-        <ProjectReference Include="..\LibraryShared\LibraryShared.csproj" />
-        <!--<ProjectReference Include="..\..\BootstrapBlazor\src\BootstrapBlazor\BootstrapBlazor.csproj" />-->
+        <PackageReference Include="AME.Extensions" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.BarCode" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.Chart" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.FontAwesome" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.BaiduMap" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.Geolocation" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.Viewer" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.WebAPI" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.Maps" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.Bluetooth" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.OCR" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.OnScreenKeyboard" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.SignaturePad" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.FileSystem" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.PdfReader" Version="7.*" />
+        <PackageReference Include="BootstrapBlazor.VideoPlayer" Version="7.*" />
+ 		<PackageReference Include="BootstrapBlazor.FileViewer" Version="7.*" />
+        <PackageReference Include="Densen.Component.Blazor" Version="7.*" />
+        <PackageReference Include="FreeSql" Version="*" />
+        <PackageReference Include="LibraryShared" Version="*" />
+        <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.*" />
+        <PackageReference Include="MiniExcel" Version="*" />
+        <PackageReference Include="Densen.Extensions.BootstrapBlazor" Version="7.*" />
+        <PackageReference Include="System.IO.Ports" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -51,12 +80,27 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Update="wwwroot\test.jpg">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Update="wwwroot\test.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
+      <Content Update="wwwroot\samples\sample.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\samples\sample.pdf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\samples\sample.xlsx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\samples\sample2.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\samples\sample2.pdf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\samples\sample2.xlsx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\samples\sample3.xlsx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ProjectExtensions>

@@ -32,6 +32,9 @@ public static class SharedServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddSharedExtensions(this IServiceCollection services)
     {
+        string UploadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "uploads");
+        if (!Directory.Exists(UploadPath)) Directory.CreateDirectory(UploadPath);
+
         var cultureInfo = new CultureInfo("zh-CN");
         CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
         CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
@@ -52,7 +55,7 @@ public static class SharedServiceCollectionExtensions
         });
 
         services.AddSingleton<IIPAddressManager, IPAddressManager>();
-        services.AddSingleton<ITools, NullService>();
+        services.AddSingleton<ITools, FakeService>();
 
         //据说已经修复
         //2022/8/11 测试fsql是不是这个问题

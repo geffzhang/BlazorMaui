@@ -1,10 +1,16 @@
     BlazorMaui , 整合Blazor,BootstrapBlazor UI组件库,Maui的共享跨平台工程示例
 
-用 c # 和 Razor 创建本机移动应用和桌面应用。可以快速开发共享代码库运行于 Windows (Winforms/WPF/UWP)、Android、iOS、macOS 的应用。
+用 c # 和 Razor 创建本机移动应用和桌面应用。可以快速开发共享代码库运行于 Windows (Winforms/WPF/WinUI3)、Android、iOS、macOS 和 Linux 的应用。
 
  [GitHub](https://github.com/densen2014/BlazorMaui) | [Gitee(仅副本)](https://gitee.com/alexchow/BlazorMaui)
+ 
+ [工程引用库源码](https://github.com/densen2014?tab=repositories&q=BootstrapBlazor.&type=&language=&sort=)
 
 ----
+> Maui Blazor 中文社区 QQ群：645660665
+>
+> ![image](https://user-images.githubusercontent.com/8428709/205045133-504dbe59-cf08-4638-a2e7-47b5036c4a31.png)
+> 
 > FreeSql QQ群：4336577(已满)、8578575(已满)、52508226(在线)
 > 
 > BA & Blazor QQ群：795206915、675147445
@@ -15,7 +21,11 @@
 > 在 M1 Mac 上开发 .NET MAUI (iOS) <https://www.cnblogs.com/densen2014/p/16057563.html>
 > 
 > 在 Windows 上开发 .NET MAUI <https://docs.microsoft.com/zh-cn/dotnet/maui/get-started/installation>
-
+>
+----
+> 安卓 App https://play.google.com/apps/internaltest/4701712767813053732
+> 
+> APK https://app1.es/maui/net7.0-android/es.app1.BlazorMaui-Signed.apk
 ----
  
 1.Blazor 简介  
@@ -46,6 +56,11 @@ Blazor 是一个使用 .NET 生成交互式客户端 Web UI 的框架：
 .NET 多平台应用 UI ( .NET MAUI) 是一个跨平台框架，用于使用 c # 和 XAML 创建本机移动应用和桌面应用。
 使用 .net MAUI，可以开发可在 Android、iOS、macOS 上运行的应用，Windows 以及从单个共享代码库运行的应用。
 
+4.Blazor Hybrid 
+
+用 c # 和 Razor 创建本机移动应用和桌面应用。可以快速开发共享代码库运行于 Windows (Winforms/WPF/UWP)、Android、iOS、macOS 的应用。
+
+Blazor Hybrid 将桌面和移动本机客户端框架与 .NET 和 Blazor 结合使用。在 Blazor Hybrid 应用中，使用 BlazorWebView 控件 Razor 组件在设备上本机运行。 组件通过本地互操作通道呈现到嵌入式 Web View 控件。 组件不在浏览器中运行，并且不涉及 WebAssembly。 Razor 组件可快速加载和执行代码，组件可通过 .NET 平台完全访问设备的本机功能, 可以跨移动设备、桌面设备和 Web 重复使用一组 Web UI 组件, 这种混合方法为你提供了本机和 Web 的最佳方法。 组件可以通过 .NET 平台访问本机功能，并呈现标准 Web UI。 
 
 
 ------------------------------------
@@ -138,3 +153,54 @@ BlazorMauiDemoWithBootstrapBlazor
 ![image](https://user-images.githubusercontent.com/8428709/196066465-db6581f8-32fd-45d9-88b7-97a26ac4b694.png)
 
 ![image](https://user-images.githubusercontent.com/8428709/196066458-86918351-3915-4798-b65a-ce4911c7e2fd.png)
+
+2023-1-5
+
+提交 BlazorLinux 
+
+![image](https://user-images.githubusercontent.com/8428709/220075839-e098015d-2289-495f-a1ef-b9873082a3ba.png)
+
+---
+#### Blazor 组件
+
+[条码扫描 ZXingBlazor](https://www.nuget.org/packages/ZXingBlazor#readme-body-tab)
+[![nuget](https://img.shields.io/nuget/v/ZXingBlazor.svg?style=flat-square)](https://www.nuget.org/packages/ZXingBlazor) 
+[![stats](https://img.shields.io/nuget/dt/ZXingBlazor.svg?style=flat-square)](https://www.nuget.org/stats/packages/ZXingBlazor?groupby=Version)
+
+[图片浏览器 Viewer](https://www.nuget.org/packages/BootstrapBlazor.Viewer#readme-body-tab)
+  
+[条码扫描 BarcodeScanner](Densen.Component.Blazor/BarcodeScanner.md)
+   
+[手写签名 Handwritten](Densen.Component.Blazor/Handwritten.md)
+
+[手写签名 SignaturePad](https://www.nuget.org/packages/BootstrapBlazor.SignaturePad#readme-body-tab)
+
+[定位/持续定位 Geolocation](https://www.nuget.org/packages/BootstrapBlazor.Geolocation#readme-body-tab)
+
+[屏幕键盘 OnScreenKeyboard](https://www.nuget.org/packages/BootstrapBlazor.OnScreenKeyboard#readme-body-tab)
+
+[百度地图 BaiduMap](https://www.nuget.org/packages/BootstrapBlazor.BaiduMap#readme-body-tab)
+
+[谷歌地图 GoogleMap](https://www.nuget.org/packages/BootstrapBlazor.Maps#readme-body-tab)
+
+[蓝牙和打印 Bluetooth](https://www.nuget.org/packages/BootstrapBlazor.Bluetooth#readme-body-tab)
+
+[PDF阅读器 PdfReader](https://www.nuget.org/packages/BootstrapBlazor.PdfReader#readme-body-tab)
+
+[文件系统访问 FileSystem](https://www.nuget.org/packages/BootstrapBlazor.FileSystem#readme-body-tab)
+
+[光学字符识别 OCR](https://www.nuget.org/packages/BootstrapBlazor.OCR#readme-body-tab)
+
+[电池信息/网络信息 WebAPI](https://www.nuget.org/packages/BootstrapBlazor.WebAPI#readme-body-tab)
+
+#### AlexChow
+
+[今日头条](https://www.toutiao.com/c/user/token/MS4wLjABAAAAGMBzlmgJx0rytwH08AEEY8F0wIVXB2soJXXdUP3ohAE/?) | [博客园](https://www.cnblogs.com/densen2014) | [知乎](https://www.zhihu.com/people/alex-chow-54) | [Gitee](https://gitee.com/densen2014) | [GitHub](https://github.com/densen2014)
+
+
+![ChuanglinZhou](https://user-images.githubusercontent.com/8428709/205942253-8ff5f9ca-a033-4707-9c36-b8c9950e50d6.png)
+
+
+![Alex Chow's GitHub stats](https://github-readme-stats.vercel.app/api?username=densen2014&include_all_commits=true&count_private=true&show_icons=true)
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=densen2014&layout=compact)

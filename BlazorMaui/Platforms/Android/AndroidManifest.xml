@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-  <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="1"
+    package="es.app1.BlazorMaui"
+    android:versionName="1.0.0">
+  <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
   <application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true"></application>
   <uses-feature android:name="android.hardware.camera" />
   <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -29,11 +32,12 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.BATTERY_STATS" />
-  <queries>
+  <!--测试 w10 wsa Windows 安卓子系统,需要注释掉这个配置
+    <queries>
     <intent>
       <action android:name="android.media.action.IMAGE_CAPTURE" />
       <action android:name="android.intent.action.VIEW" />
       <data android:scheme="geo"/>
     </intent>
-  </queries>
+  </queries>-->
 </manifest>

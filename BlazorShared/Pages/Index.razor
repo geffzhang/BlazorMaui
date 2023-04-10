@@ -3,79 +3,91 @@
 @attribute [TabItemOption(Text = "首页", Icon = "fa fa-fa")]
 
 <h1>Blazor Demo</h1>
+<Title>BlazorMaui</Title>
 <TimerAme />
 
 <Tab>
-    <TabItem Text="平台测试">
-        <Button Text="定位权限" OnClick="检查定位权限" />
-        <span>@定位权限</span><br /><br />
-        <Button Text="摄像机权限" OnClick="检查摄像机权限" />
-        <span>@摄像机权限</span><br /><br />
-        <Button Text="定位" OnClick="获取定位" />
-        <span>@Locations</span><br /><br />
-        <Button Text="TakePhoto" OnClick="TakePhoto" />
-        <span>@PhotoFilename</span><br /><br />
-        <Button Text="NavigateToBuilding25" OnClick="NavigateToBuilding25" />
-        <span>@导航消息</span><br /><br />
-        <Button Text="NavigateToBuilding" OnClick="NavigateToBuilding" /><br /><br />
-        <Button Text="NavigateToBuildingByPlacemark" OnClick="NavigateToBuildingByPlacemark" /><br /><br />
-        <Button Text="DriveToBuilding25" OnClick="DriveToBuilding25" /><br /><br />
-        <Button Text="截屏" OnClick="TakeScreenshotAsync" /><br /><br />
+    <TabItem Text="环境">
+        <br />
+        <b>
+            版本:
+        </b>
+        <br />
+        @version
+        <br /><br />
+        <b>
+            FriendlyName:
+        </b>
+        <br />
+        @AppDomain.CurrentDomain.FriendlyName
+        <br /><br />
+        <b>
+            TargetFrameworkName:
+        </b>
+        <br />
+        @AppDomain.CurrentDomain.SetupInformation.TargetFrameworkName
+        <br /><br />
     </TabItem>
-    <TabItem Text="PC">
-        <Table TItem="PcStatus"
-               Items="@pcStatuss"
-               AutoGenerateColumns="true" />
-        <TableLazyHero @ref="list1"
-                       TItem="PC"
-                       ShowColumnList="true"
-                       刷新="刷新数据"
-                       TableSize="TableSize.Normal"
-                       DoubleClickToEdit="false"
-                       HeaderStyle=TableHeaderStyle.None
-                       IsPagination="false"
-                       ShowRefresh="false"
-                       IsStriped="false"
-                       RenderMode="TableRenderMode.Auto" />
-    </TabItem>
-    <TabItem Text="Items">
-        <Table TItem="Item"
-               Items="@records"
-               AutoGenerateColumns="true" />
-    </TabItem>
-    <TabItem Text="其他">
-        <p></p>
-        <h4>Demo for Blazor & BootstrapBlazor</h4>
-        <p></p>
-        <p></p>
-        <p><a href="https://www.cnblogs.com/densen2014/">博客园</a></p>
-        <p><a href="https://toutiao.com/c/user/53462780186/?from=qrcode">头条</a></p>
-        <p><a href="https://blog.csdn.net/alex_zoucn">CSDN</a></p>
-        <p><a href="https://www.zhihu.com/people/alex-chow-54">知乎</a></p>
-        <p><a href="https://github.com/densen2014/Densen.Extensions">GitHub</a></p>
-        <p><a href="https://gitee.com/densen2014/Densen.Extensions">Gitee</a></p>
-        <p><a href="https://github.com/densen2014/BlazorMaui">BlazorMaui</a></p>
-        <p><a href="https://www.nuget.org/profiles/DensenInformatica">Nuget</a></p>
-    </TabItem>
-    <TabItem Text="@version">
-        <Badge Color="Color.Primary">
-            ID: @IPAddressManager.GetIdentifier();
-        </Badge>
-        <Badge Color="Color.Success">
-            IP: @WebClientInfo.ClientIpAddress;
-        </Badge>
-        <Badge Color="Color.Warning">
-            IP: @IPAddressManager.GetIPAddress();
-        </Badge>
-        @foreach (var item in IPAddressManager.GetIPAddresList())
+    <TabItem Text="本机IP">
+        <br />
+        <b>
+            机器码 ID:
+        </b>
+        <br />
+        @IPAddressManager.GetIdentifier();
+        <br /><br />
+        IPAddressManager<br />
+        <b>
+            IP:
+        </b><br />
+        @IPAddressManager.GetIPAddress();
+        <br /><br />
+        <b>
+            IPs:
+        </b><br />
+        @if (IPAddressManager != null && IPAddressManager?.GetIPAddresList() != null)
         {
-            <Badge Color="Color.Info">
-                IPs: @item;
-            </Badge>
+            foreach (var item in IPAddressManager.GetIPAddresList())
+            {
+                @item;
+                <br />
 
+            }
         }
+        <br /><br />
+        WebClientInfo<br />
+        <b>
+            IP:
+        </b><br />
+        @WebClientInfo.ClientIpAddress;
+        <br /><br />
         <Button Text="粘贴" OnClick="粘贴" />
         <span>@文字</span>
     </TabItem>
-
 </Tab>
+
+
+@inject AppState AppState
+
+
+<p>The current count is <strong>@AppState.Counter</strong></p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Increment</button>
+
+<p>This is a shared component</p>
+
+@code {
+    public int Counter { get; set; } = 1;
+
+
+    void IncrementCount()
+    {
+        AppState.Counter++;
+    }
+
+    [JSInvokable]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+}

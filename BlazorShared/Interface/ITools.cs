@@ -12,73 +12,43 @@
 
         Task<string> CheckMock();
 
-        double DistanceBetweenTwoLocations();
+        double? DistanceBetweenTwoLocations();
 
         void ShowSettingsUI();
-        string GetAppInfo();
-        Task<string> NavigateToBuilding25();
-        Task<string> NavigateToBuilding();
-        Task<string> NavigateToBuildingByPlacemark();
-        Task<string> DriveToBuilding25();
+        string? GetAppInfo();
+        Task<string> NavigateToMadrid();
+        Task<string> NavigateToPlazaDeEspana();
+        Task<string> NavigateToPlazaDeEspanaByPlacemark();
+        Task<string> DriveToPlazaDeEspana();
         Task<string> TakeScreenshotAsync();
-        List<string> GetPortlist();
-    }
+        
+        string? CacheDirectory();
+        string? AppDataDirectory();
 
-    public class NullService : ITools
-    {
-        public Task<string> CheckPermissionsCamera() => Task.FromResult("未实现");
-        public Task<string> CheckPermissionsLocation() => Task.FromResult("未实现");
-        public Task<string> CheckMock() => Task.FromResult("未实现");
+        /// <summary>
+        /// 获取串口列表
+        /// </summary>
+        /// <returns></returns>
+        List<string>? GetPortlist();
 
-        public double DistanceBetweenTwoLocations() => 0;
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <returns></returns>
+        Task<string> Print();
 
-        public Task<string> GetCachedLocation() => Task.FromResult("未实现");
+        /// <summary>
+        /// 读NFC
+        /// </summary>
+        /// <returns></returns>
+        Task<string> ReadNFC();
 
-        public Task<string> GetCurrentLocation() => Task.FromResult("未实现");
-        public Task<string> TakePhoto() => Task.FromResult("未实现");
-        public void ShowSettingsUI() { }
-        public string GetAppInfo() => "未实现";
-        public Task<string> NavigateToBuilding25() => Task.FromResult("未实现");
-        public Task<string> NavigateToBuilding() => Task.FromResult("未实现");
-        public Task<string> NavigateToBuildingByPlacemark() => Task.FromResult("未实现");
-        public Task<string> DriveToBuilding25() => Task.FromResult("未实现");
-        public Task<string> TakeScreenshotAsync() => Task.FromResult("未实现");
-
-#if WINDOWS
-        public List<string> GetPortlist()
-        {
-            return System.IO.Ports.SerialPort.GetPortNames().ToList();
-        }
-#elif ANDROID || IOS || MACCATALYST
-        public List<string> GetPortlist()
-        {
-            if (OperatingSystem.IsIOS() || OperatingSystem.IsMacCatalyst())
-            {
-                return null;
-            }
-            else if (OperatingSystem.IsAndroid())
-            {
-                return null;
-            }
-            else
-            {
-                return null;
-            } 
-            
-        }
-#else
-        public List<string> GetPortlist()
-        {
-            if (OperatingSystem.IsWindows())
-            {
-                return System.IO.Ports.SerialPort.GetPortNames().ToList();
-            }
-            else
-            {
-                return null;
-            }
-        }
-#endif
+        /// <summary>
+        /// 客户显示屏
+        /// </summary>
+        /// <returns></returns>
+        Task<string> ExtDSP();
 
     }
-}
+
+ }

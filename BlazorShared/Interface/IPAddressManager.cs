@@ -1,6 +1,7 @@
 ﻿using BlazorShared.Services;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.Versioning;
 #if (ANDROID)
 using System.Net;
 #endif
@@ -13,16 +14,16 @@ namespace Shared.DependencyServices
 {
     public class IPAddressManager : IIPAddressManager
     {
-        public string firstMacAddress()
+        [UnsupportedOSPlatform("browser")]
+        public string? FirstMacAddress()
         {
             try
             {
-
                 return NetworkInterface
                        .GetAllNetworkInterfaces()
                        .Where(nic => nic.OperationalStatus == OperationalStatus.Up && nic.NetworkInterfaceType != NetworkInterfaceType.Loopback)
                        .Select(nic => nic.GetPhysicalAddress().ToString())
-                       .FirstOrDefault();
+                       .FirstOrDefault() ?? "UnknowMacAddress";
             }
             catch (Exception)
             {
@@ -33,30 +34,46 @@ namespace Shared.DependencyServices
 
 
 #if (ANDROID)
-        public string GetIPAddress()
+        public string? GetIPAddress()
         {
-            IPAddress[] adresses = Dns.GetHostAddresses(Dns.GetHostName());
+            try
+            {
+                IPAddress[] adresses = Dns.GetHostAddresses(Dns.GetHostName());
 
-            if (adresses != null && adresses[0] != null)
-            {
-                return adresses[0].ToString();
+                if (adresses != null && adresses[0] != null)
+                {
+                    return adresses[0].ToString();
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception)
             {
-                return null;
-            }
+                return "UnknowIPAddress";
+            } 
         }
+
         public List<string> GetIPAddresList()
         {
-            IPAddress[] adresses = Dns.GetHostAddresses(Dns.GetHostName());
-            return adresses?.Where(a => a != null).Select(a => a.ToString()).ToList();
+            try
+            {
+                IPAddress[] adresses = Dns.GetHostAddresses(Dns.GetHostName());
+                return adresses?.Where(a => a != null).Select(a => a.ToString()).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<string> { "UnknowIPAddresList" };
+            }
 
         }
 
 
 #else
 
-        public string GetIPAddress()
+        [UnsupportedOSPlatform("browser")]
+        public string? GetIPAddress()
         {
             string ipAddress = "";
 
@@ -86,6 +103,7 @@ namespace Shared.DependencyServices
             return ipAddress;
         }
 
+        [UnsupportedOSPlatform("browser")]
         public List<string> GetIPAddresList()
         {
             var ipAddress = new List<string>();
@@ -118,46 +136,64 @@ namespace Shared.DependencyServices
 #endif
 
 #if (ANDROID)
-        public string GetIdentifier()
+        public string? GetIdentifier()
         {
             return Android.Provider.Settings.Secure.GetString(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
         }
 
-        public string GetVersion()
+        public string? GetVersion()
         {
-            var activity = Android.App.Application.Context;
-            return activity.PackageManager.GetPackageInfo(activity.PackageName, 0).VersionName;
+            try
+            {
+
+                var activity = Android.App.Application.Context;
+                return activity.PackageManager.GetPackageInfo(activity.PackageName, 0).VersionName;
+            }
+            catch (Exception)
+            {
+                return "UnknowVersion";
+            }
+
         }
 #else
 #if (IOS || MACCATALYST)
-        public string GetIdentifier()
+        public string? GetIdentifier()
         {
-            var query = new SecRecord(SecKind.GenericPassword);
-            query.Service = NSBundle.MainBundle.BundleIdentifier;
-            query.Account = "UniqueID";
-
-            NSData uniqueId = SecKeyChain.QueryAsData(query);
-            if (uniqueId == null)
+            try
             {
-                query.ValueData = NSData.FromString(System.Guid.NewGuid().ToString());
-                var err = SecKeyChain.Add(query);
-                if (err != SecStatusCode.Success && err != SecStatusCode.DuplicateItem)
-                    throw new Exception("Cannot store Unique ID");
+                var query = new SecRecord(SecKind.GenericPassword);
+                query.Service = NSBundle.MainBundle.BundleIdentifier;
+                query.Account = "UniqueID";
 
-                return query.ValueData.ToString();
+                NSData? uniqueId = SecKeyChain.QueryAsData(query);
+                if (uniqueId == null)
+                {
+                    query.ValueData = NSData.FromString(System.Guid.NewGuid().ToString());
+                    var err = SecKeyChain.Add(query);
+                    if (err != SecStatusCode.Success && err != SecStatusCode.DuplicateItem)
+                        throw new Exception("Cannot store Unique ID");
+
+                    return query.ValueData.ToString();
+                }
+                else
+                {
+                    return uniqueId.ToString();
+                }
             }
-            else
+            catch (Exception)
             {
-                return uniqueId.ToString();
+                return "UnknowIdentifier";
             }
+
         }
 
-        public string GetVersion()
+        public string? GetVersion()
         {
             return NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"].ToString();
         }
 #else
-        public string GetIdentifier()
+        [UnsupportedOSPlatform("browser")]
+        public string? GetIdentifier()
         {
             try
             {
@@ -167,6 +203,7 @@ namespace Shared.DependencyServices
                                                    nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet))
                                .Select(nic => nic.GetPhysicalAddress())
                                .FirstOrDefault();
+                if (macAddress==null) return "UnknowIdentifier";
                 return string.Join(":", (from ma in macAddress.GetAddressBytes() select ma.ToString("X2")).ToArray());
             }
             catch (Exception)
@@ -175,7 +212,7 @@ namespace Shared.DependencyServices
             }
         }
 
-        public string GetVersion()
+        public string? GetVersion()
         {
             return "1.17";
         }

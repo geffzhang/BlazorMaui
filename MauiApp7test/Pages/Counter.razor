@@ -1,0 +1,14 @@
+﻿@page "/counter"
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+#if WINDOWS
+        WinUI.App.SetTitle("FileViewers");
+#endif
+    }
+}
+
+<BlazorShared.Pages.FileViewers />
