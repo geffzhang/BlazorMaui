@@ -1,9 +1,9 @@
 ﻿using BootstrapBlazor.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using MenuItem = BootstrapBlazor.Components.MenuItem;
 
 namespace BlazorShared.Shared;
 
-[JSModuleAutoLoader("/_content/BlazorShared/modules/menu.js", ModuleName = "Menu", Relative = false)]
 public partial class NavMenu
 {
     private IEnumerable<MenuItem> Menus { get; set; } = new List<MenuItem>
@@ -66,9 +66,16 @@ public partial class NavMenu
                }
             },
             new MenuItem() { Text = "测试" ,Items= new List<MenuItem>
-                {
+               {
                     new MenuItem() { Text = "视频墙", Url = "/VideoWall" },
                     new MenuItem() { Text = "Iframe下载文件", Url = "/TestIframe2" },
+               }
+            },
+            new MenuItem() { Text = "Url跳转" ,Items= new List<MenuItem>
+                {
+                    new MenuItem() { Text = "Iframe-Baidu", Url = "/TestIframeBaidu" },
+                    new MenuItem() { Text = "blazor.app1.es", Url = "https://blazor.app1.es" },
+                    new MenuItem() { Text = "baidu.com", Url = "https://baidu.com" },
                 }
             },
             new MenuItem() { Text = "Linux平台", Url = "/LinuxPage" },

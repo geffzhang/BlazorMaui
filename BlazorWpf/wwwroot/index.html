@@ -12,17 +12,7 @@
     <link href="_content/BootstrapBlazor.Chart/css/bootstrap.blazor.chart.bundle.min.css" rel="stylesheet">
     <link href="_content/BlazorShared/css/app.css" rel="stylesheet" />
     <link href="BlazorWpf.styles.css" rel="stylesheet" />
-    <script>
-        function showAlert() {
 
-            DotNet
-                .invokeMethodAsync("BlazorShared", "ReturnArrayAsync")
-                .then(res => {
-                    alert(`Hello from Blazor Component: ${JSON.stringify(res)}`)
-                })
-
-        }
-    </script>
 </head>
 
 <body>
@@ -31,7 +21,7 @@
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
+        <a class="dismiss"><i class="fa-solid fa-xmark"></i></a>
     </div>
 
     <script src="_framework/blazor.webview.js"></script>
